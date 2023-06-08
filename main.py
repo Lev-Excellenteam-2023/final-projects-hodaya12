@@ -18,3 +18,14 @@ def process_presentation(presentation_path):
     writing_to_json.writing_to_json_file(name_of_presentation, list_of_responses)
 
 
+def main():
+    try:
+        args = parse_arguments()
+        presentation_path = args.presentation_path
+        process_presentation(presentation_path)
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
