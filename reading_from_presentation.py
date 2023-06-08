@@ -33,5 +33,17 @@ def read_from_slide(slide_text):
     return slide.Slide(title,text_of_slide,count_of_slides)
 
 
+def read_from_presentation(path_to_presentation:str):
+    """
+      Retrieves all the slides from a presentation.
+
+      :param path_to_presentation: The path of the presentation.
+      :returns: The slides of the presentation.
+      """
+    presentation = pptx.Presentation(path_to_presentation)
+    for slide in presentation.slides:
+        slide=read_from_slide(slide)
+        if  slide!= None:
+            yield slide
 
 
