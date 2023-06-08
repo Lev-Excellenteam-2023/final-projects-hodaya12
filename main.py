@@ -5,6 +5,12 @@ import writing_to_json
 import argparse
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Script for explaining presentation slides from ChatGPT.")
+    parser.add_argument("presentation_path", help="Path to the presentation")
+    return parser.parse_args()
+
+
 def process_presentation(presentation_path):
     name_of_presentation = presentation_path.split('\\')[::-1][0].split('.')[0]
     slides = reading_from_presentation.read_from_presentation(presentation_path)
