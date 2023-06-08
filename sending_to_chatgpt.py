@@ -53,6 +53,17 @@ async def send_slide_to_gpt(slide:slide,messages:list):
 
 
 
+async def send_presentation_to_gpt(slides:list, name_of_presentation:str):
+    """
+    Sends each slide of a presentation to ChatGPT for explanation.
+
+    :param slides: A list of slides to be sent for explanation.
+    :param name_of_presentation: The name of the presentation.
+    :returns: A list of responses from ChatGPT for each slide.
+    """
+    messages = [{"role": "system", "content": formulate_query(name_of_presentation)}]
+    return await asyncio.gather(*(send_slide_to_gpt(slide, messages) for slide in slides), return_exceptions=True)
+
 
 
 
