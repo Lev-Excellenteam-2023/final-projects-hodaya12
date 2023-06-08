@@ -3,7 +3,7 @@ import time
 import openai
 import asyncio
 import slide
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = ''
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
