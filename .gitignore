@@ -1,0 +1,14 @@
+# Ignore the py37async directory
+/py37async/
+
+# Ignore JSON files
+*.json
+
+# Ignore PPTX files
+*.pptx
+
+# Ignore the .idea directory
+.idea/
+
+# Ignore __pycache__ directory
+__pycache__/
