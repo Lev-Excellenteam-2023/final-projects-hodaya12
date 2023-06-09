@@ -2,6 +2,7 @@ import json
 
 
 
+
 def writing_to_json_file(name_of_presentation:str, slides_explanations:list):
     """
      Writes slide explanations to a JSON file.

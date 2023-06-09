@@ -28,16 +28,16 @@ async def send_slide_to_gpt(slide:slide,messages:list):
         :raises: RateLimitError: If the rate limit for the API is reached.
              InvalidRequestError: If the maximum context length for the model is exceeded.
         """
-    content_message = 'The title: ' + slide.title + '\n' + 'The content: ' + slide.paragraphs
-    messages.append({"role": "user", "content": content_message})
+    messages.append({"role": "user", "content": 'The title: ' + slide.title + '\n' + 'The content: ' + slide.paragraphs})
     try:
-        chat_response = openai.ChatCompletion.create(
+        chat_response = await openai.ChatCompletion.acreate(
             model="gpt-3.5-turbo",
             messages=messages,
             timeout=30
         )
         chat_response = chat_response.choices[0].message.content
-        messages.append({"role": "assistant", "content": chat_response})
+        if chat_response!=None:
+            messages.append({"role": "assistant", "content": chat_response})
     except openai.error.RateLimitError:
         print("Rate limit reached. Waiting before retrying...")
         time.sleep(20)  # Wait for 20 seconds before retrying
@@ -62,7 +62,8 @@ async def send_presentation_to_gpt(slides:list, name_of_presentation:str):
     :returns: A list of responses from ChatGPT for each slide.
     """
     messages = [{"role": "system", "content": formulate_query(name_of_presentation)}]
-    return await asyncio.gather(*(send_slide_to_gpt(slide, messages) for slide in slides), return_exceptions=True)
+    return await  asyncio.gather(*(send_slide_to_gpt(slide,\
+    messages) for slide in slides), return_exceptions=True)
 
 
 
