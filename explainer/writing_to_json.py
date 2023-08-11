@@ -1,4 +1,6 @@
 import json
+import pathlib
+import os
 
 
 
@@ -11,6 +13,6 @@ def writing_to_json_file(name_of_presentation:str, slides_explanations:list):
      :param slides_explanations: The list of slide explanations.
      :returns: None
      """
-    with open(name_of_presentation + ".json", "w") as file:
+    with open(str(pathlib.Path(os.getenv("OUTPUTS")))+'\\'+name_of_presentation + ".json", "w") as file:
         json.dump({"Slides": [{"Explaination": slide} for slide in slides_explanations if slide!=None]}, file,indent=4)
         print('a JSON file has saved in this directory.')
